@@ -14,7 +14,7 @@
   body{margin:0; font-family:Georgia,"Noto Serif Armenian",serif; color:var(--ink); background:var(--bg); line-height:1.7}
   a{color:var(--link)}
   /* Layout */
-  .wrap{display:flex; max-width:1200px; margin:0 auto}
+  .wrap{display:flex; max-width:1100px; margin:0 auto}
   nav#toc{width:280px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
     padding:24px 16px; border-right:1px solid #ddd; font-size:.85rem; font-family:system-ui,sans-serif}
   nav#toc h2{font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
@@ -75,13 +75,58 @@
     .draft-note{display:none}
   }
   @media(max-width:900px){ .wrap{flex-direction:column} nav#toc{position:static; width:auto; height:auto; border-right:none; border-bottom:1px solid #ddd} main{padding:24px} }
+  /* ---------- Նավիգացիա ---------- */
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  main h2[id], main h3[id]{scroll-margin-top:18px}
+  /* ընթերցման առաջընթացի գիծ */
+  #progress{position:fixed; top:0; left:0; height:3px; width:0; background:var(--accent);
+    z-index:50; transition:width .1s linear}
+  /* TOC՝ մաքուր ոլորագիծ */
+  nav#toc{scrollbar-width:thin; scrollbar-color:#ccc transparent; scrollbar-gutter:stable;
+    overscroll-behavior:contain}
+  nav#toc::-webkit-scrollbar{width:8px}
+  nav#toc::-webkit-scrollbar-track{background:transparent}
+  nav#toc::-webkit-scrollbar-thumb{background:#ccc; border-radius:4px}
+  nav#toc::-webkit-scrollbar-thumb:hover{background:#aaa}
+  /* մասերը համարակալման շարքից դուրս */
+  nav#toc > details > summary{display:none}
+  nav#toc > details > ol{list-style:none; padding-left:0}
+  nav#toc > details > ol > li{margin:.45em 0}
+  nav#toc > details > ol > li > strong{display:block; font-size:.7rem; text-transform:uppercase;
+    letter-spacing:.12em; color:var(--accent); margin:1.5em 0 .5em}
+  nav#toc > details > ol > li > ol{padding-left:26px}
+  /* ընթացիկ բաժնի ընդգծում */
+  nav#toc a{display:block; padding:3px 8px; margin-left:-8px; border-radius:4px;
+    border-left:2px solid transparent; line-height:1.35}
+  nav#toc a:hover{background:rgba(0,0,0,.04)}
+  nav#toc a.active{background:rgba(139,26,26,.08); border-left-color:var(--accent);
+    color:var(--accent); font-weight:700}
+  /* «վեր» կոճակ */
+  #totop{position:fixed; right:22px; bottom:22px; z-index:40; display:none;
+    width:42px; height:42px; border-radius:50%; border:1px solid #ddd; background:#fff;
+    color:var(--accent); font-size:1.1rem; line-height:1; cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.12)}
+  #totop:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
+  #totop.show{display:block}
+  @media(max-width:900px){
+    nav#toc h2{display:none}
+    nav#toc > details > summary{display:block; cursor:pointer; padding:8px 0;
+      font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+    nav#toc > details[open] > summary{margin-bottom:4px; border-bottom:1px solid #eee}
+    #totop{right:14px; bottom:14px}
+  }
+  @media print{ #progress, #totop{display:none !important} }
 </style>
 </head>
 <body>
+<div id="progress"></div>
 <div class="wrap">
 
 <nav id="toc">
   <h2>Բովանդակություն</h2>
+  <details open>
+  <summary>Բովանդակություն</summary>
   <ol>
     <li><a href="#arajaban">Հեղինակի առաջաբանը</a></li>
     <li><a href="#neratsutyun">Ներածություն․ տերմինի անատոմիան</a></li>
@@ -126,6 +171,7 @@
       </ol>
     </li>
   </ol>
+  </details>
 </nav>
 
 <main>
@@ -137,7 +183,7 @@
 <p class="subtitle" style="font-size:.95rem">«Եզրակացությունն անում է փաստը, ոչ ածականը»</p>
 </div>
 
-<p class="draft-note">Սևագիր, տարբերակ 0.6 (վերջին շաբաթական թարմացում՝ 2026-08-02)։ 13 գլուխ, 6 հավելված, 9 գծապատկեր, ապացուցման 4 չափանիշ (Չ1–Չ4), ~355 հղում։ Դեղինով նշված հատվածները դեռ աղբյուր չունեն։ Հայեցակարգը՝ <code>README.md</code>, տվյալաշարը՝ <code>nshanakumner.csv</code>։ Թարմացվում է շաբաթական մշտադիտարկմամբ։</p>
+<p class="draft-note">Սևագիր, տարբերակ 0.7 (վերջին շաբաթական թարմացում՝ 2026-08-05)։ 13 գլուխ, 6 հավելված, 9 գծապատկեր, ապացուցման 4 չափանիշ (Չ1–Չ4), 550+ աղբյուրի հղում (242 եզակի URL), Հավելված Ա-ում՝ 100+ ժամանակագրական դրվագ։ Դեղինով նշված հատվածները դեռ աղբյուր չունեն։ Հայեցակարգը՝ <code>README.md</code>, տվյալաշարը՝ <code>nshanakumner.csv</code>։ Թարմացվում է շաբաթական մշտադիտարկմամբ։</p>
 
 <h2 id="arajaban" style="page-break-before:always">Հեղինակի առաջաբանը</h2>
 
@@ -1143,5 +1189,64 @@
 
 </main>
 </div>
+<button id="totop" type="button" aria-label="Վեր՝ էջի սկիզբ" title="Վեր">↑</button>
+<script>
+(function(){
+  var toc = document.getElementById('toc');
+  if(!toc) return;
+  var targets = [].slice.call(toc.querySelectorAll('a[href^="#"]')).map(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    return el ? {a:a, el:el} : null;
+  }).filter(Boolean);
+  targets.sort(function(p,q){
+    return (p.el.compareDocumentPosition(q.el) & Node.DOCUMENT_POSITION_PRECEDING) ? 1 : -1;
+  });
+
+  var bar = document.getElementById('progress');
+  var totop = document.getElementById('totop');
+  var current = null, ticking = false;
+
+  function update(){
+    ticking = false;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    var y = window.pageYOffset || doc.scrollTop;
+
+    if(bar) bar.style.width = (max > 0 ? (y / max * 100) : 0) + '%';
+    if(totop) totop.classList.toggle('show', y > 600);
+
+    var best = null, line = 90;
+    for(var i = 0; i < targets.length; i++){
+      if(targets[i].el.getBoundingClientRect().top <= line) best = targets[i];
+      else break;
+    }
+    if(best !== current){
+      if(current) current.a.classList.remove('active');
+      if(best){
+        best.a.classList.add('active');
+        if(toc.scrollHeight > toc.clientHeight + 4){
+          var r = best.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+          if(r.top < t.top + 8 || r.bottom > t.bottom - 8){
+            toc.scrollTop += (r.top - t.top) - toc.clientHeight / 2;
+          }
+        }
+      }
+      current = best;
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  if(totop) totop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  var d = toc.querySelector('details');
+  if(d && window.matchMedia('(max-width:900px)').matches) d.removeAttribute('open');
+
+  update();
+})();
+</script>
 </body>
 </html>
