@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Լակոտակրատիա">
+  <rect width="64" height="64" rx="12" fill="#8b1a1a"/>
+  <!-- «Լ» տառը՝ գրքի մոնոգրամը -->
+  <path d="M22 13 V44 H45" fill="none" stroke="#faf8f5" stroke-width="7"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- ժամանակագծի նշանը -->
+  <path d="M14 53 H50" fill="none" stroke="#faf8f5" stroke-width="3.5"
+        stroke-linecap="round" opacity=".5"/>
+</svg>

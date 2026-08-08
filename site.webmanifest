@@ -1,0 +1,17 @@
+{
+  "name": "Լակոտակրատիա — փաստագրական ժամանակագրություն 2018–2026",
+  "short_name": "Լակոտակրատիա",
+  "lang": "hy",
+  "description": "Հայաստանի կառավարման ձախողումների և մարդու իրավունքների ոտնահարումների փաստագրում՝ ամեն պնդման դիմաց ստուգելի աղբյուրով։",
+  "start_url": "/lacotacratia/",
+  "scope": "/lacotacratia/",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#8b1a1a",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}
