@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gagikh.github.io/lacotacratia/sitemap.xml
