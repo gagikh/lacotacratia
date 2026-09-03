@@ -105,13 +105,20 @@
   /* Chronology table */
   table.chrono{width:100%; border-collapse:collapse; font-size:.88rem; margin:1.5em 0}
   table.chrono th{background:var(--accent); color:#fff; text-align:left; padding:8px 10px; font-family:system-ui,sans-serif; font-size:.78rem; text-transform:uppercase; letter-spacing:.05em}
-  table.chrono td{border-bottom:1px solid #ddd; padding:8px 10px; vertical-align:top; overflow-wrap:anywhere}
-  /* Առաջին սյունակի white-space:nowrap-ը հեռացված է 02.09.2026-ին։ Հավելված Ա-ում այն
-     ամսաթիվ է, բայց Բ/Գ/Զ-ում՝ երկար տեքստ, և nowrap-ը աղյուսակները հանում էր էջից
-     (փաստագրված՝ ամբողջ փաստաթղթի 2037px հորիզոնական հոսք, ամենալայն աղյուսակը՝ 2013px)։
-     Ամսաթվերն իրենք բացատ չեն պարունակում, ուստի «26.08.2026»-ը ամեն դեպքում չի կոտրվում։ */
-  table.chrono td:first-child, table.chrono th:first-child{width:14%}
-  table.chrono td:last-child, table.chrono th:last-child{width:18%}
+  /* Աղյուսակների լայնության երկու կանոն, երկուսն էլ՝ 02.09.2026-ի սխալների արդյունք։
+
+     1) Առաջին սյունակին ՄԻ ՎԵՐԱԴԱՐՁՐՈՒ white-space:nowrap։ Հավելված Ա-ում այն ամսաթիվ է,
+        բայց Բ/Գ/Զ-ում՝ երկար տեքստ, և nowrap-ը աղյուսակները հանում էր էջից
+        (չափված՝ ամբողջ փաստաթղթի 2037px հորիզոնական հոսք, ամենալայն աղյուսակը՝ 2013px)։
+
+     2) Առաջին/վերջին սյունակին ՄԻ տուր հաստատուն width (%): փորձված է 14%/18%-ը և սխալ էր —
+        Հավելված Գ-ի առաջին սյունակը խոստումի ՏԵՔՍՏՆ է, ոչ ամսաթիվ, և 14%-ի դեպքում
+        վերածվում էր մեկ-երկու նիշանոց ուղղահայաց ժապավենի։ Բրաուզերի auto-դասավորությունը
+        ինքն է ճիշտ բաշխում՝ չափված 1265px էկրանին՝ Ա 158/353/197, Գ 248/356/104,
+        Զ 181/375/152, Ե 124/390/194, Բ 139/202/201/166, հորիզոնական հոսք՝ 0։
+
+     break-word (ոչ anywhere)՝ որպեսզի հայերեն բառերը չկոտրվեն միջից՝ առանց կարիքի։ */
+  table.chrono td{border-bottom:1px solid #ddd; padding:8px 10px; vertical-align:top; overflow-wrap:break-word}
   table.chrono td:first-child{font-family:system-ui,sans-serif; font-size:.8rem; color:var(--muted)}
   table.chrono tr.yr td{background:#eee8dd; font-weight:700; font-family:system-ui,sans-serif; letter-spacing:.06em}
   table.chrono td .src-type{margin-left:4px}
@@ -147,6 +154,23 @@
     .draft-note{display:none}
   }
   @media(max-width:900px){ .wrap{flex-direction:column} nav#toc{position:static; width:auto; height:auto; border-right:none; border-bottom:1px solid #ddd} main{padding:24px} }
+
+  /* SVG գծապատկերների ներսում ծանոթագրական տողերը երբեմն դուրս են գալիս viewBox-ից
+     և էջին ավելացնում հորիզոնական հոսք (չափված՝ 2 <text> տարր)։ */
+  main svg{overflow:hidden}
+
+  /* Բջջային էկրաններ. աղյուսակներն ինքնուրույն են ոլորվում, ամբողջ էջը՝ ոչ։
+     375px-ին չափված՝ մինչ այս կանոնները էջը դուրս էր գալիս 329px-ով, այժմ՝ 0։
+     Աղյուսակի display:block-ը այն դարձնում է ոլորվող տարա՝ պահպանելով ներսի
+     աղյուսակային դասավորությունը (ստուգված բոլոր 11 աղյուսակի վրա)։ */
+  @media(max-width:760px){
+    table.chrono{display:block; overflow-x:auto; max-width:100%}
+    table.chrono td, table.chrono th{min-width:110px}
+    table.chrono td:nth-child(2){min-width:200px}
+    /* Վերնագիրը inline style-ով 3rem է (ուստի՝ !important) և որպես մեկ անխզելի
+       բառ 437px էր զբաղեցնում 327px լայնության վրա։ */
+    main h1{font-size:clamp(1.7rem, 9vw, 3rem) !important}
+  }
   /* ---------- Նավիգացիա ---------- */
   html{scroll-behavior:smooth}
   @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
